@@ -1,0 +1,23 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/metal_wall.png</file>
+        <file>images/metal_wall_s.png</file>
+        <file>images/wall.png</file>
+        <file>images/moss.png</file>
+        <file>images/bomb.png</file>
+        <file>images/stone.png</file>
+        <file>images/ground.png</file>
+        <file>images/door.png</file>
+        <file>images/opendoor.png</file>
+        <file>images/player.png</file>
+        <file>images/diamond.png</file>
+        <file>images/explosion_01.png</file>
+        <file>images/explosion_02.png</file>
+        <file>images/explosion_03.png</file>
+        <file>images/explosion_04.png</file>
+        <file>images/bug_top.png</file>
+        <file>images/bug_left.png</file>
+        <file>images/bug_bottom.png</file>
+        <file>images/bug_right.png</file>
+    </qresource>
+</RCC>

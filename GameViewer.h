@@ -5,7 +5,7 @@
 
 #include "GameDefs.h"
 
-class BoulderGame ;
+class DemineurGame ;
 class GameDrawer ;
 class InterfaceButton ;
 
@@ -17,7 +17,7 @@ public:
         
     GameViewer(QWidget *parent=NULL) ;
 
-    void setGame(BoulderGame *g) ;
+    void setGame(DemineurGame *g) ;
     void setCurrentMode(GameMode m) ;
     GameMode currentMode() { return mCurrentMode ; }
 
@@ -38,7 +38,7 @@ public slots:
 private:
     void pixelCoordinatesToGameCoordinate(int x,int y,int& i,int& j) const;
 
-    BoulderGame *mGame ;
+    DemineurGame *mGame ;
     GameDrawer *mGameDrawer ;
 
     float mSceneCenterX;

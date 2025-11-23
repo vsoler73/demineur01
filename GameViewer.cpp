@@ -7,7 +7,7 @@
 #include "GameViewer.h"
 #include "GameDrawer.h"
 #include "GameInterface.h"
-#include "BoulderGame.h"
+#include "DemineurGame.h"
 
 //#define DEBUG_GAME_VIEWER 1
 
@@ -58,7 +58,7 @@ void GameViewer::pixelCoordinatesToGameCoordinate(int x,int y,int& i,int& j) con
 {
 }
 
-void GameViewer::setGame(BoulderGame *g)
+void GameViewer::setGame(DemineurGame *g)
 {
     mGame = g ;
     

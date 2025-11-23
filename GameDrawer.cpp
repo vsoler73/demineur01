@@ -7,7 +7,7 @@
 #include "GameDrawer.h"
 #include "GameInterface.h"
 #include "Level.h"
-#include "BoulderGame.h"
+#include "DemineurGame.h"
 
 static const uint32_t SQUARE_SIZE_IN_PIXELS = 50 ;
 static const uint32_t mSceneCenterX = 0 ;
@@ -35,7 +35,7 @@ float GameDrawer::gameCoordToWindowCoordY(int i)
     return SQUARE_SIZE_IN_PIXELS * i + mSceneCenterY;
 }
 
-void GameDrawer::drawButtons(const BoulderGame& game,int w,int h,const std::vector<InterfaceButton*>& buttons)
+void GameDrawer::drawButtons(const DemineurGame& game,int w,int h,const std::vector<InterfaceButton*>& buttons)
 {
     QPainter painter(&mDrawBuffer) ;
 
@@ -48,7 +48,7 @@ void GameDrawer::drawButtons(const BoulderGame& game,int w,int h,const std::vect
     }
 }
 
-void GameDrawer::update(const BoulderGame& game,int w,int h,GameMode m)
+void GameDrawer::update(const DemineurGame& game,int w,int h,GameMode m)
 {
     if(mDrawBuffer.width() != w || mDrawBuffer.height() != h)
         mDrawBuffer = QPixmap(w,h) ;

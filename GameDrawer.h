@@ -6,7 +6,7 @@
 #include "Level.h"
 #include "GameDefs.h"
 
-class BoulderGame ;
+class DemineurGame ;
 class InterfaceButton;
 
 class GameDrawer
@@ -14,8 +14,8 @@ class GameDrawer
 	public: 
 		GameDrawer(int W,int H);
 
-		virtual void update(const BoulderGame& game, int w, int h, GameMode m) ;
-		virtual void drawButtons(const BoulderGame& game,int w,int h,const std::vector<InterfaceButton*>& buttons);
+        virtual void update(const DemineurGame& game, int w, int h, GameMode m) ;
+        virtual void drawButtons(const DemineurGame& game,int w,int h,const std::vector<InterfaceButton*>& buttons);
 		virtual QPixmap pixmap() const ;
 
 	float gameCoordToWindowCoordX(int i)  ;

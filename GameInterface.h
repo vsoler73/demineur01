@@ -11,7 +11,7 @@
 
 #include "ui_GameInterface.h"
 
-class BoulderGame;
+class DemineurGame;
 
 class InterfaceButton
 {
@@ -39,7 +39,7 @@ class GameInterface: public QMainWindow, private Ui::GameInterface
 	private:
 		void loadGame(const QString& name) ;
 
-		BoulderGame *_current_game ;
+		DemineurGame *_current_game ;
 
 private:
 };

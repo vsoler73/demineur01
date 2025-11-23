@@ -9,7 +9,7 @@
 #include <QGraphicsItem>
 
 #include "GameInterface.h"
-#include "BoulderGame.h"
+#include "DemineurGame.h"
 
 using namespace std ;
 
@@ -71,7 +71,7 @@ void GameInterface::newGame()
 	    delete _current_game ;
     }
 
-    _current_game = new BoulderGame ;
+    _current_game = new DemineurGame ;
     _current_game->start();
     
     gameViewer->setCurrentMode(GAME_MODE_GAME) ;
@@ -102,7 +102,7 @@ void GameInterface::loadGame()
 
 void GameInterface::loadGame(const QString& name)
 {
-    BoulderGame *tmp_game = new BoulderGame ;
+    DemineurGame *tmp_game = new DemineurGame ;
     tmp_game->currentState().load(name.toStdString()) ;
     
     if(_current_game != NULL)

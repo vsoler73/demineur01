@@ -2,8 +2,6 @@
 #define _GAMEINTERFACE_H
 
 #include <QObject>
-#include <QTimer>
-#include <QThread>
 #include <QMainWindow>
 #include <QGraphicsPixmapItem>
 #include <QGraphicsScene>
@@ -32,16 +30,10 @@ class GameInterface: public QMainWindow, private Ui::GameInterface
 		void quit() const ;
 		void newGame() ;
 		void editGame() ;
-		void saveGame() const ;
 		void about() const ;
-		void loadGame() ;
 
 	private:
-		void loadGame(const QString& name) ;
-
 		DemineurGame *_current_game ;
-
-private:
 };
 
 #endif

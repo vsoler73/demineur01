@@ -1,3 +1,4 @@
+#include <stdexcept>
 #include <QApplication>
 #include <QWidget>
 #include <QGLViewer/qglviewer.h>
@@ -6,6 +7,9 @@
 
 int main(int argc,char *argv[])
 {
+    try {
+
+
 	QApplication app(argc,argv) ;
     
     	GameInterface I ;
@@ -13,4 +17,8 @@ int main(int argc,char *argv[])
 	I.show();
 
 	return app.exec() ;
+}
+    catch(std::exception&e){
+        std::cerr<<"error:"<<e.what()<<std::endl;
+    }
 }

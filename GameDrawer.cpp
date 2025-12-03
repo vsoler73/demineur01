@@ -69,8 +69,8 @@ void GameDrawer::update(const DemineurGame& game,int w,int h,GameMode m)
     
     int resolution = SQUARE_SIZE_IN_PIXELS ;
             
-    for(int i=0;i<game.currentState().sizeX();++i)
-	    for(int j=0;j<game.currentState().sizeY();++j)
+    for(uint i=0;i<game.currentState().sizeX();++i)
+        for(uint j=0;j<game.currentState().sizeY();++j)
 	    {
                     float mx = gameCoordToWindowCoordX(i) ;
                     float my = gameCoordToWindowCoordX(j) ;
@@ -104,32 +104,12 @@ QPixmap GameDrawer::getImageForObjectId(const Level::ObjectId& oid)
 {
     switch(oid)
     {
-    case Level::Wall:           return QPixmap(":/images/wall.png");
-    case Level::Stone:          return QPixmap(":/images/stone.png");
-    case Level::Earth:          return QPixmap(":/images/ground.png");
-    case Level::Exit:           return QPixmap(":/images/opendoor.png");
-    case Level::ClosedExit:     return QPixmap(":/images/door.png");
-    case Level::Player:         return QPixmap(":/images/player.png");
-    case Level::Diamond:        return QPixmap(":/images/diamond.png");
-    case Level::Bomb:           return QPixmap(":/images/bomb.png");
-    case Level::Explosion_01:   return QPixmap(":/images/explosion_01.png");
-    case Level::Explosion_02:   return QPixmap(":/images/explosion_02.png");
-    case Level::Explosion_03:   return QPixmap(":/images/explosion_03.png");
-    case Level::Explosion_04:   return QPixmap(":/images/explosion_04.png");
-    case Level::Bug_top:        return QPixmap(":/images/bug_top.png");
-    case Level::Bug_left:       return QPixmap(":/images/bug_left.png");
-    case Level::Bug_bottom:     return QPixmap(":/images/bug_bottom.png");
-    case Level::Bug_right:      return QPixmap(":/images/bug_right.png");
-    case Level::Moss:           return QPixmap(":/images/moss.png");
-    case Level::MetalWall0:     return QPixmap(":/images/metal_wall.png");
-    case Level::MetalWall1:     return QPixmap(":/images/metal_wall_s.png");
-
-    case Level::Void:  {
-	    QColor col = QColor::fromHsv(0,255,0) ;
-	    QPixmap pix(128,128) ;
-	    pix.fill(col) ;
-	    return pix ;
-    }
+        /* OSEKOUR
+    case Level::Void:           return QPixmap(":/images/wall.png");
+    case Level::Mine:          return QPixmap(":/images/stone.png");
+    case Level::Drapeau:          return QPixmap(":/images/ground.png");
+    case Level::CaseRevelee:           return QPixmap(":/images/opendoor.png");
+*/
     default:
         QColor col = QColor::fromHsv(oid*20,255,255) ;
         QPixmap pix(128,128) ;
@@ -137,6 +117,7 @@ QPixmap GameDrawer::getImageForObjectId(const Level::ObjectId& oid)
         
         return pix ;
     }
+
 }
 
 QPixmap GameDrawer::getGameSprite(const Level::ObjectId& oid,int resolution)

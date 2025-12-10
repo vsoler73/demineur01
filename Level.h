@@ -3,18 +3,23 @@
 #include <vector>
 #include <stdint.h>
 #include <string>
+#include "flags.h"
+
+enum class ObjectId:uint8_t{
+    Void = 0,
+    Mine = 1,
+    Drapeau = 2,
+    CaseRevelee = 4
+};
+
+REGISTER_ENUM_FLAGS_TYPE(ObjectId);
+
 class Level
 {
 public:
-    typedef int ObjectId;
 	Level();
 	Level(const std::string& fname);
 
-    static const ObjectId
-        Void,
-        Mine,
-        Drapeau,
-        CaseRevelee;
 
 	void initDefault();
 
@@ -44,7 +49,7 @@ private:
 	uint32_t mSizeX ;
 	uint32_t mSizeY ;
 
-    std::vector<int> mContent ;
+    std::vector<ObjectId> mContent ;
 	PlayerState mPlayerState ;
 
 	bool mAllDiamondsCollected ;

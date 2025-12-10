@@ -9,7 +9,6 @@
 #include <QGraphicsItem>
 
 #include "GameInterface.h"
-#include "DemineurGame.h"
 
 using namespace std ;
 
@@ -64,7 +63,7 @@ void GameInterface::newGame()
 	    delete _current_game ;
     }
 
-    _current_game = new DemineurGame ;
+    _current_game = new Level ;
     
     gameViewer->setCurrentMode(GAME_MODE_GAME) ;
     gameViewer->setGame(_current_game) ;

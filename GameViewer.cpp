@@ -6,7 +6,6 @@
 #include "GameViewer.h"
 #include "GameDrawer.h"
 #include "GameInterface.h"
-#include "DemineurGame.h"
 
 //#define DEBUG_GAME_VIEWER 1
 
@@ -55,15 +54,10 @@ void GameViewer::pixelCoordinatesToGameCoordinate(int x,int y,int& i,int& j) con
 {
 }
 
-void GameViewer::setGame(DemineurGame *g)
+void GameViewer::setGame(Level *g)
 {
     mGame = g ;
     
-    //setSceneRadius(2*std::max(mGame->currentState().sizeX(),mGame->currentState().sizeY())) ;
-    //updateGL() ;
-    
-    QObject::connect(mGame,SIGNAL(changed()),this,SLOT(reDraw())) ;
-
     setGeometry(mGameDrawer->pixmap().rect());
     updateGeometry();
 

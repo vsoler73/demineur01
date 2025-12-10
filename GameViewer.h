@@ -4,8 +4,8 @@
 #include <QGLViewer/qglviewer.h>
 
 #include "GameDefs.h"
+#include "Level.h"
 
-class DemineurGame ;
 class GameDrawer ;
 class InterfaceButton ;
 
@@ -17,7 +17,7 @@ public:
         
     GameViewer(QWidget *parent=NULL) ;
 
-    void setGame(DemineurGame *g) ;
+    void setGame(Level *g) ;
     void setCurrentMode(GameMode m) ;
     GameMode currentMode() { return mCurrentMode ; }
 
@@ -38,7 +38,7 @@ public slots:
 private:
     void pixelCoordinatesToGameCoordinate(int x,int y,int& i,int& j) const;
 
-    DemineurGame *mGame ;
+    Level *mGame ;
     GameDrawer *mGameDrawer ;
 
     float mSceneCenterX;

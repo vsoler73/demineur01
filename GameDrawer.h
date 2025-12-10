@@ -14,8 +14,8 @@ class GameDrawer
 	public: 
 		GameDrawer(int W,int H);
 
-        virtual void update(const DemineurGame& game, int w, int h, GameMode m) ;
-        virtual void drawButtons(const DemineurGame& game,int w,int h,const std::vector<InterfaceButton*>& buttons);
+        virtual void update(const Level& game, int w, int h, GameMode m) ;
+        virtual void drawButtons(const Level& game,int w,int h,const std::vector<InterfaceButton*>& buttons);
 		virtual QPixmap pixmap() const ;
 
 	float gameCoordToWindowCoordX(int i)  ;
@@ -27,8 +27,8 @@ class GameDrawer
 	private:
 		QPixmap mDrawBuffer ;
         
-    	QPixmap getImageForObjectId(const Level::ObjectId &oid);
-	QPixmap getGameSprite(const Level::ObjectId& oid,int resolution);
+        QPixmap getImageForObjectId(const ObjectId &oid);
+    QPixmap getGameSprite(const ObjectId& oid,int resolution);
         
 //private:
 //    void drawBackgroundGrid();
@@ -38,8 +38,8 @@ class GameDrawer
 //    float gameCoordToWindowCoordY(int i) ;
 //    float gameCoordToWindowCoordX(int i) ;
 //
-//    QPixmap getImageForObjectId(const Level::ObjectId &oid);
-//    QPixmap getGameSprite(const Level::ObjectId& oid,int resolution);
+//    QPixmap getImageForObjectId(const ObjectId &oid);
+//    QPixmap getGameSprite(const ObjectId& oid,int resolution);
 //
     
     typedef std::map<uint64_t,QPixmap> ImageCache ;

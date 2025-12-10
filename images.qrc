@@ -1,3 +1,5 @@
 <RCC>
-    <qresource prefix="/"/>
+    <qresource prefix="/">
+    	<file>images/drapeau.png</file>
+    </qresource>
 </RCC>

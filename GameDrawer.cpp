@@ -7,7 +7,6 @@
 #include "GameDrawer.h"
 #include "GameInterface.h"
 #include "Level.h"
-#include "DemineurGame.h"
 
 static const uint32_t SQUARE_SIZE_IN_PIXELS = 50 ;
 static const uint32_t mSceneCenterX = 0 ;
@@ -35,7 +34,7 @@ float GameDrawer::gameCoordToWindowCoordY(int i)
     return SQUARE_SIZE_IN_PIXELS * i + mSceneCenterY;
 }
 
-void GameDrawer::drawButtons(const DemineurGame& game,int w,int h,const std::vector<InterfaceButton*>& buttons)
+void GameDrawer::drawButtons(const Level &game, int w, int h, const std::vector<InterfaceButton*>& buttons)
 {
     QPainter painter(&mDrawBuffer) ;
 
@@ -48,7 +47,7 @@ void GameDrawer::drawButtons(const DemineurGame& game,int w,int h,const std::vec
     }
 }
 
-void GameDrawer::update(const DemineurGame& game,int w,int h,GameMode m)
+void GameDrawer::update(const Level& level,int w,int h,GameMode m)
 {
     if(mDrawBuffer.width() != w || mDrawBuffer.height() != h)
         mDrawBuffer = QPixmap(w,h) ;
@@ -59,8 +58,6 @@ void GameDrawer::update(const DemineurGame& game,int w,int h,GameMode m)
     
     painter.setPen(QColor::fromRgb(0,0,0)) ;
     
-    const Level& level(game.currentState()) ;
-
     for(uint i=0;i<=level.sizeX();++i)
         painter.drawLine(QPointF(gameCoordToWindowCoordX(0),gameCoordToWindowCoordY(i)),QPointF(gameCoordToWindowCoordX(level.sizeY()),gameCoordToWindowCoordY(i))) ;
 
@@ -69,13 +66,13 @@ void GameDrawer::update(const DemineurGame& game,int w,int h,GameMode m)
     
     int resolution = SQUARE_SIZE_IN_PIXELS ;
             
-    for(uint i=0;i<game.currentState().sizeX();++i)
-        for(uint j=0;j<game.currentState().sizeY();++j)
+    for(uint i=0;i<level.sizeX();++i)
+        for(uint j=0;j<level.sizeY();++j)
 	    {
                     float mx = gameCoordToWindowCoordX(i) ;
                     float my = gameCoordToWindowCoordX(j) ;
                     
-                    painter.drawPixmap(mx,my,getGameSprite( game.currentState()(i,j), resolution )) ;
+                    painter.drawPixmap(mx,my,getGameSprite( level(i,j), resolution )) ;
 	    }
     
     QFont font(painter.font()) ;
@@ -100,18 +97,18 @@ QPixmap GameDrawer::pixmap() const
 	return mDrawBuffer ;
 }
 
-QPixmap GameDrawer::getImageForObjectId(const Level::ObjectId& oid)
+QPixmap GameDrawer::getImageForObjectId(const ObjectId& oid)
 {
     switch(oid)
     {
         /* OSEKOUR
     case Level::Void:           return QPixmap(":/images/wall.png");
     case Level::Mine:          return QPixmap(":/images/stone.png");
-    case Level::Drapeau:          return QPixmap(":/images/ground.png");
-    case Level::CaseRevelee:           return QPixmap(":/images/opendoor.png");
+ */   case ObjectId::Drapeau:          return QPixmap(":/images/drapeau.png");
+ /*   case Level::CaseRevelee:           return QPixmap(":/images/opendoor.png");
 */
     default:
-        QColor col = QColor::fromHsv(oid*20,255,255) ;
+        QColor col = QColor::fromHsv(int(oid)*20,255,255) ;
         QPixmap pix(128,128) ;
         pix.fill(col) ;
         
@@ -120,7 +117,7 @@ QPixmap GameDrawer::getImageForObjectId(const Level::ObjectId& oid)
 
 }
 
-QPixmap GameDrawer::getGameSprite(const Level::ObjectId& oid,int resolution)
+QPixmap GameDrawer::getGameSprite(const ObjectId& oid,int resolution)
 {
     // store them in a cache
     

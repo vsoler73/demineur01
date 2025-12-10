@@ -33,7 +33,7 @@ class GameInterface: public QMainWindow, private Ui::GameInterface
 		void about() const ;
 
 	private:
-		DemineurGame *_current_game ;
+        Level *_current_game ;
 };
 
 #endif

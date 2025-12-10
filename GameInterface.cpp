@@ -30,7 +30,7 @@ GameInterface::GameInterface()
 	connect(actionLoad,SIGNAL(triggered()),this,SLOT(loadGame())) ;
 	connect(actionLevelEditor,SIGNAL(triggered()),this,SLOT(editGame())) ;
 
-    //loadGame(QString("start.blv")) ;
+    newGame() ;
 }
 
 void GameInterface::editGame() 

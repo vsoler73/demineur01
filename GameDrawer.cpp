@@ -101,11 +101,19 @@ QPixmap GameDrawer::getImageForObjectId(const ObjectId& oid)
 {
     switch(oid)
     {
-        /* OSEKOUR
-    case Level::Void:           return QPixmap(":/images/wall.png");
-    case Level::Mine:          return QPixmap(":/images/stone.png");
- */   case ObjectId::Drapeau:          return QPixmap(":/images/drapeau.png");
- /*   case Level::CaseRevelee:           return QPixmap(":/images/opendoor.png");
+        // OSEKOUR
+    case ObjectId::Void:           return QPixmap(":/images/drapeau.png");
+    case ObjectId::Mine:          return QPixmap(":/images/stone.png");
+    case ObjectId::Drapeau:          return QPixmap(":/images/drapeau.png");
+/*    case ObjectId::nbrMine0:           return QPixmap(":/images/opendoor.png");
+    case ObjectId::nbrMine1:           return QPixmap(":/images/opendoor.png");
+    case ObjectId::nbrMine2:           return QPixmap(":/images/opendoor.png");
+    case ObjectId::nbrMine3:           return QPixmap(":/images/opendoor.png");
+    case ObjectId::nbrMine4:           return QPixmap(":/images/opendoor.png");
+    case ObjectId::nbrMine5:           return QPixmap(":/images/opendoor.png");
+    case ObjectId::nbrMine6:           return QPixmap(":/images/opendoor.png");
+    case ObjectId::nbrMine7:           return QPixmap(":/images/opendoor.png");
+    case ObjectId::nbrMine8:           return QPixmap(":/images/opendoor.png");
 */
     default:
         QColor col = QColor::fromHsv(int(oid)*20,255,255) ;

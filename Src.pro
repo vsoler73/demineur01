@@ -17,7 +17,8 @@ HEADERS = GameViewer.h \
 	  GameInterface.h \
           GameDrawer.h \
           Level.h \
-          GameDefs.h
+          GameDefs.h\
+          flags.h
 
 OBJECTS_DIR = .obj
 TARGET = demineur

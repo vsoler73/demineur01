@@ -23,7 +23,7 @@ class GameDrawer
     
     	int windowCoordToGameCoordX(float x) ;
     	int windowCoordToGameCoordY(float y) ;
-
+        QPixmap getImageForNbrMine(int i);
 	private:
 		QPixmap mDrawBuffer ;
         

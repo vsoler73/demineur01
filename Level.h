@@ -50,7 +50,10 @@ private:
 	uint32_t mSizeY ;
 
     std::vector<ObjectId> mContent ;
+    std::vector<uint8_t> mNbrMine ;
 	PlayerState mPlayerState ;
+
+    void IncrementMine(int i, int j);
 
 	bool mAllDiamondsCollected ;
 

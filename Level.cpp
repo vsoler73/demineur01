@@ -8,8 +8,8 @@ Level::Level()
 	initDefault() ;
 
 	mPlayerState = PLAYER_PLAY;
-	mCollectedDiamonds = 0 ;
-    mAllDiamondsCollected = false;
+//	mCollectedDiamonds = 0 ;
+//  mAllDiamondsCollected = false;
 }
 
 ObjectId& Level::operator()(uint32_t i,uint32_t j)
@@ -26,22 +26,39 @@ ObjectId Level::operator()(uint32_t i,uint32_t j) const
 
 	return mContent[mSizeX * j + i] ;
 }
+void Level::IncrementMine(int i, int j){
+    if (i<0 || i<0)
+        return;
+    if (i>=mSizeX || j>=mSizeY)
+        return;
+    mNbrMine[mSizeX*j + i]++;
+}
 
 void Level::initDefault()
 {
-	mCollectedDiamonds = 0 ;
+//	mCollectedDiamonds = 0 ;
 	mSizeX = 50 ;
 	mSizeY = 30 ;
 
     mContent.clear();
+    mNbrMine.clear();
     mContent.resize(mSizeX*mSizeY,ObjectId::Void) ;
+    mNbrMine.resize(mSizeX*mSizeY,0) ;
 
-    for(uint i=0;i<mSizeX;++i)
-        for(uint j=0;j<mSizeY;++j)
-            operator()(i,j) = ObjectId::Void ;
-
-	for(int i=0;i<100;++i)
-        operator()(lrand48()%mSizeX,lrand48()%mSizeY) |= ObjectId::Mine ;
+    for(int i=0;i<100;++i){
+        int xmine=lrand48()%mSizeX;
+        int ymine=lrand48()%mSizeY;
+        if (!(operator()(xmine,ymine)&ObjectId::Mine)){
+            operator()(xmine,ymine) |= ObjectId::Mine ;
+            for(int x=-1;x<2;++x)
+                for(int y=-1;y<2;++y)
+                    if (!(x==0 && y==0))
+                        IncrementMine(x+xmine,y+ymine);
+        }
+        else {
+            i--;
+        }
+    }
 }
 
 

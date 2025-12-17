@@ -26,8 +26,8 @@ GameInterface::GameInterface()
 	//mMousePressed = false ;
 
 	connect(actionNew,SIGNAL(triggered()),this,SLOT(newGame())) ;
-	connect(actionSave,SIGNAL(triggered()),this,SLOT(saveGame())) ;
-	connect(actionLoad,SIGNAL(triggered()),this,SLOT(loadGame())) ;
+//	connect(actionSave,SIGNAL(triggered()),this,SLOT(saveGame())) ;
+//	connect(actionLoad,SIGNAL(triggered()),this,SLOT(loadGame())) ;
 	connect(actionLevelEditor,SIGNAL(triggered()),this,SLOT(editGame())) ;
 
     newGame() ;

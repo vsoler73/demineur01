@@ -96,25 +96,33 @@ QPixmap GameDrawer::pixmap() const
 {
 	return mDrawBuffer ;
 }
+QPixmap GameDrawer::getImageForNbrMine(int i)
+{
+    switch (i) {
+    default:
+    case 0:           return QPixmap(":/images/0.png");
+    case 1:           return QPixmap(":/images/1.png");
+    case 2:           return QPixmap(":/images/2.png");
+    case 3:           return QPixmap(":/images/3.png");
+    case 4:           return QPixmap(":/images/4.png");
+    case 5:           return QPixmap(":/images/5.png");
+    case 6:           return QPixmap(":/images/6.png");
+    case 7:           return QPixmap(":/images/7.png");
+    case 8:           return QPixmap(":/images/8.png");
+    }
+    }
+
 
 QPixmap GameDrawer::getImageForObjectId(const ObjectId& oid)
 {
     switch(oid)
     {
         // OSEKOUR
-    case ObjectId::Void:           return QPixmap(":/images/drapeau.png");
-    case ObjectId::Mine:          return QPixmap(":/images/stone.png");
-    case ObjectId::Drapeau:          return QPixmap(":/images/drapeau.png");
-/*    case ObjectId::nbrMine0:           return QPixmap(":/images/opendoor.png");
-    case ObjectId::nbrMine1:           return QPixmap(":/images/opendoor.png");
-    case ObjectId::nbrMine2:           return QPixmap(":/images/opendoor.png");
-    case ObjectId::nbrMine3:           return QPixmap(":/images/opendoor.png");
-    case ObjectId::nbrMine4:           return QPixmap(":/images/opendoor.png");
-    case ObjectId::nbrMine5:           return QPixmap(":/images/opendoor.png");
-    case ObjectId::nbrMine6:           return QPixmap(":/images/opendoor.png");
-    case ObjectId::nbrMine7:           return QPixmap(":/images/opendoor.png");
-    case ObjectId::nbrMine8:           return QPixmap(":/images/opendoor.png");
-*/
+    case ObjectId::Void:               return QPixmap(":/images/CaseBlanche.png");
+    case ObjectId::Mine:               return QPixmap(":/images/stone.png");
+    case ObjectId::Drapeau:            return QPixmap(":/images/drapeau.png");
+
+
     default:
         QColor col = QColor::fromHsv(int(oid)*20,255,255) ;
         QPixmap pix(128,128) ;

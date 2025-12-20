@@ -28,8 +28,9 @@ class GameDrawer
 		QPixmap mDrawBuffer ;
         
         QPixmap getImageForObjectId(const ObjectId &oid);
-    QPixmap getGameSprite(const ObjectId& oid,int resolution);
-        
+    QPixmap getGameSprite_oid(const ObjectId& oid,int resolution);
+    QPixmap getGameSprite_number(int n, int resolution);
+
 //private:
 //    void drawBackgroundGrid();
 //    void drawGameContent();

@@ -15,7 +15,7 @@ Level::Level()
 ObjectId& Level::operator()(uint32_t i,uint32_t j)
 {
 	assert(i < mSizeX) ;
-	assert(j < mSizeY) ;
+    assert(j < mSizeY) ;
 
 	return mContent[mSizeX * j + i] ;
 }
@@ -26,6 +26,15 @@ ObjectId Level::operator()(uint32_t i,uint32_t j) const
 
 	return mContent[mSizeX * j + i] ;
 }
+int Level::NbrMine(uint32_t i, uint32_t j) const {
+    assert(i < mSizeX) ;
+    assert(j < mSizeY) ;
+
+    return mNbrMine[mSizeX * j + i] ;
+}
+
+
+
 void Level::IncrementMine(int i, int j){
     if (i<0 || i<0)
         return;

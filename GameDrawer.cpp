@@ -72,7 +72,14 @@ void GameDrawer::update(const Level& level,int w,int h,GameMode m)
                     float mx = gameCoordToWindowCoordX(i) ;
                     float my = gameCoordToWindowCoordX(j) ;
                     
-                    painter.drawPixmap(mx,my,getGameSprite( level(i,j), resolution )) ;
+                    if (!!(level(i,j)&ObjectId::CaseRevelee))
+                        if (!!(level(i,j)&(ObjectId::Mine|ObjectId::Drapeau)))
+                            painter.drawPixmap(mx,my,getGameSprite_oid( level(i,j), resolution )) ;
+                        else
+                            painter.drawPixmap(mx,my,getGameSprite_number( level.NbrMine(i,j), resolution )) ;
+                    else
+                        painter.drawPixmap(mx,my,getGameSprite_oid( ObjectId::CaseBlanche, resolution )) ;
+
 	    }
     
     QFont font(painter.font()) ;
@@ -80,7 +87,7 @@ void GameDrawer::update(const Level& level,int w,int h,GameMode m)
     
     painter.setPen(QRgb(0xffffffff)) ;
     painter.setFont(font) ;
-    painter.drawText(50,150,QString::number(level.collectedDiamonds())) ;
+//    painter.drawText(50,150,QString::number(level.collectedDiamonds())) ;
 
     if(m == GAME_MODE_EDITOR)
     {
@@ -118,9 +125,9 @@ QPixmap GameDrawer::getImageForObjectId(const ObjectId& oid)
     switch(oid)
     {
         // OSEKOUR
-    case ObjectId::Void:               return QPixmap(":/images/CaseBlanche.png");
-    case ObjectId::Mine:               return QPixmap(":/images/stone.png");
-    case ObjectId::Drapeau:            return QPixmap(":/images/drapeau.png");
+    case ObjectId::CaseBlanche:        return QPixmap(":/images/CaseBlanche.png");
+    case ObjectId::Mine:               return QPixmap(":/images/Mine.png");
+    case ObjectId::Drapeau:            return QPixmap(":/images/Drapeau.png");
 
 
     default:
@@ -130,10 +137,9 @@ QPixmap GameDrawer::getImageForObjectId(const ObjectId& oid)
         
         return pix ;
     }
-
 }
 
-QPixmap GameDrawer::getGameSprite(const ObjectId& oid,int resolution)
+QPixmap GameDrawer::getGameSprite_oid(const ObjectId& oid,int resolution)
 {
     // store them in a cache
     
@@ -149,6 +155,27 @@ QPixmap GameDrawer::getGameSprite(const ObjectId& oid,int resolution)
         
         mImageCache[item_id] = pix ;
         
+        return pix ;
+    }
+    else
+        return it->second ;
+}
+QPixmap GameDrawer::getGameSprite_number(int n, int resolution)
+{
+    // store them in a cache
+
+    uint32_t item_id = (int)n + 100 + 1000*resolution ;	// this should allow enough object ids!
+
+    ImageCache::const_iterator it = mImageCache.find(item_id) ;
+
+    if(it == mImageCache.end())
+    {
+        std::cerr << "Image for id " << n << " and resolution " << resolution << " not in cache. Creating!" << std::endl;
+
+        QPixmap pix = getImageForNbrMine(n).scaled(QSize(resolution,resolution),Qt::IgnoreAspectRatio,Qt::SmoothTransformation);
+
+        mImageCache[item_id] = pix ;
+
         return pix ;
     }
     else

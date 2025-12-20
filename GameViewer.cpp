@@ -30,7 +30,12 @@ void GameViewer::mousePressEvent(QMouseEvent *e)
 {
     mMousePressed = true ;
     mOldMouseX = e->x() ;
-    mOldMouseY = height()-1-e->y() ;
+    mOldMouseY = e->y() ;
+    int i=mGameDrawer->windowCoordToGameCoordX(mOldMouseX);
+    int j=mGameDrawer->windowCoordToGameCoordY(mOldMouseY);
+    (*mGame)(i,j)|=ObjectId::CaseRevelee;
+    mGameDrawer->update(*mGame,width(),height(),mCurrentMode);
+    update();
 }
 void GameViewer::mouseReleaseEvent(QMouseEvent *e)
 {

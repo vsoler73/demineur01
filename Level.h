@@ -9,7 +9,9 @@ enum class ObjectId:uint8_t{
     Void = 0,
     Mine = 1,
     Drapeau = 2,
-    CaseRevelee = 4
+    CaseRevelee = 4,
+
+    CaseBlanche = 64
 };
 
 REGISTER_ENUM_FLAGS_TYPE(ObjectId);
@@ -30,18 +32,18 @@ public:
 	} PlayerState;
 
 	PlayerState playerState() const { return mPlayerState ; }
-	bool allDiamondCollected() const { return mAllDiamondsCollected ; }
+//	bool allDiamondCollected() const { return mAllDiamondsCollected ; }
 
 	ObjectId operator()(uint32_t i,uint32_t j) const ;
 	ObjectId& operator()(uint32_t i,uint32_t j) ;
-
+    int NbrMine(uint32_t i, uint32_t j)const;
 	void die() { mPlayerState = PLAYER_DEAD ; }
     void startGame() { mPlayerState = PLAYER_PLAY ; }
 
 	uint32_t sizeX() const { return mSizeX ; }
 	uint32_t sizeY() const { return mSizeY ; }
 
-	uint32_t collectedDiamonds() const { return mCollectedDiamonds ; }
+//	uint32_t collectedDiamonds() const { return mCollectedDiamonds ; }
 
     void fill(ObjectId o ) ;
 
@@ -55,7 +57,7 @@ private:
 
     void IncrementMine(int i, int j);
 
-	bool mAllDiamondsCollected ;
+//	bool mAllDiamondsCollected ;
 
-    uint32_t mCollectedDiamonds ;
+ //   uint32_t mCollectedDiamonds ;
 };

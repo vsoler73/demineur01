@@ -54,9 +54,13 @@ void Level::initDefault()
     mContent.resize(mSizeX*mSizeY,ObjectId::Void) ;
     mNbrMine.resize(mSizeX*mSizeY,0) ;
 
-    for(int i=0;i<100;++i){
+    for(int i=0;i<250;++i){
         int xmine=lrand48()%mSizeX;
         int ymine=lrand48()%mSizeY;
+        while (xmine<2 && ymine<2){
+            xmine=lrand48()%mSizeX;
+            ymine=lrand48()%mSizeY;
+        }
         if (!(operator()(xmine,ymine)&ObjectId::Mine)){
             operator()(xmine,ymine) |= ObjectId::Mine ;
             for(int x=-1;x<2;++x)

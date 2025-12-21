@@ -73,8 +73,10 @@ void GameDrawer::update(const Level& level,int w,int h,GameMode m)
                     float my = gameCoordToWindowCoordX(j) ;
                     
                     if (!!(level(i,j)&ObjectId::CaseRevelee))
-                        if (!!(level(i,j)&(ObjectId::Mine|ObjectId::Drapeau)))
-                            painter.drawPixmap(mx,my,getGameSprite_oid( level(i,j), resolution )) ;
+                        if (!!(level(i,j)&ObjectId::Drapeau))
+                            painter.drawPixmap(mx,my,getGameSprite_oid(level(i,j)&(ObjectId::Drapeau), resolution )) ;
+                        else if (!!(level(i,j)&ObjectId::Mine))
+                            painter.drawPixmap(mx,my,getGameSprite_oid( level(i,j)&(ObjectId::Mine), resolution )) ;
                         else
                             painter.drawPixmap(mx,my,getGameSprite_number( level.NbrMine(i,j), resolution )) ;
                     else

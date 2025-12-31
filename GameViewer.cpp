@@ -2,11 +2,11 @@
 #include <QMouseEvent>
 #include <QStylePainter>
 #include <QMessageBox>
+#include <unistd.h>
 
 #include "GameViewer.h"
 #include "GameDrawer.h"
 #include "GameInterface.h"
-
 //#define DEBUG_GAME_VIEWER 1
 
 static const uint32_t SQUARE_SIZE_IN_PIXELS = 50 ;
@@ -25,7 +25,48 @@ GameViewer::GameViewer(QWidget *parent)
     setFocusPolicy(Qt::StrongFocus) ;
     mCurrentMode = GAME_MODE_GAME;
 }
+void GameViewer::CaseFlip(int x, int y)
+{
+    std::list<std::pair<int,int>> Etape1;
+    std::list<std::pair<int,int>> Etape2;
+    std::list<std::pair<int,int>> Etape3;
+    Etape1.push_back({x,y});
 
+    while (!Etape1.empty())
+    {
+        for(auto x:Etape1)
+        {
+            int i = x.first;
+            int j = x.second;
+            if (!((*mGame)(i,j)&ObjectId::CaseRevelee) && (mGame->NbrMine(i,j)==0))
+            {
+                if (mGame->ok(i+1,j) && !((*mGame)(i+1,j)&ObjectId::CaseRevelee)) Etape2.push_back({i+1,j});
+                if (mGame->ok(i-1,j) && !((*mGame)(i-1,j)&ObjectId::CaseRevelee)) Etape2.push_back({i-1,j});
+                if (mGame->ok(i,j+1) && !((*mGame)(i,j+1)&ObjectId::CaseRevelee)) Etape2.push_back({i,j+1});
+                if (mGame->ok(i,j-1) && !((*mGame)(i,j-1)&ObjectId::CaseRevelee)) Etape2.push_back({i,j-1});
+
+                if (mGame->ok(i+1,j+1) && !((*mGame)(i+1,j+1)&ObjectId::CaseRevelee)) Etape3.push_back({i+1,j+1});
+                if (mGame->ok(i-1,j-1) && !((*mGame)(i-1,j-1)&ObjectId::CaseRevelee)) Etape3.push_back({i-1,j-1});
+                if (mGame->ok(i-1,j+1) && !((*mGame)(i-1,j+1)&ObjectId::CaseRevelee)) Etape3.push_back({i-1,j+1});
+                if (mGame->ok(i+1,j-1) && !((*mGame)(i+1,j-1)&ObjectId::CaseRevelee)) Etape3.push_back({i+1,j-1});
+            }
+
+            (*mGame)(i,j)|=ObjectId::CaseRevelee;
+        }
+        mGameDrawer->update(*mGame,width(),height(),mCurrentMode);
+        update();
+        QApplication::processEvents();
+        usleep(50000);
+        Etape1=Etape2;
+        Etape2=Etape3;
+        Etape3.clear();
+
+        std::cerr << "Etape 1" ; for(auto x:Etape1) std::cerr << "(" << x.first << "," << x.second << ") " ; std::cerr << std::endl;
+        std::cerr << "Etape 2" ; for(auto x:Etape2) std::cerr << "(" << x.first << "," << x.second << ") " ; std::cerr << std::endl;
+        std::cerr << "Etape 3" ; for(auto x:Etape3) std::cerr << "(" << x.first << "," << x.second << ") " ; std::cerr << std::endl;
+    }
+
+}
 void GameViewer::mousePressEvent(QMouseEvent *e)
 {
     mMousePressed = true ;
@@ -33,7 +74,8 @@ void GameViewer::mousePressEvent(QMouseEvent *e)
     mOldMouseY = e->y() ;
     int i=mGameDrawer->windowCoordToGameCoordX(mOldMouseX);
     int j=mGameDrawer->windowCoordToGameCoordY(mOldMouseY);
-    (*mGame)(i,j)|=ObjectId::CaseRevelee;
+    CaseFlip(i,j);
+    //(*mGame)(i,j)|=ObjectId::CaseRevelee;
     mGameDrawer->update(*mGame,width(),height(),mCurrentMode);
     update();
 }

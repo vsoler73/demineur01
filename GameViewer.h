@@ -37,7 +37,7 @@ public slots:
     
 private:
     void pixelCoordinatesToGameCoordinate(int x,int y,int& i,int& j) const;
-    void CaseFlip(int x, int y);
+    void CaseFlip(int x, int y, int SleepTime_µs=50000);
 
     Level *mGame ;
     GameDrawer *mGameDrawer ;

@@ -152,7 +152,7 @@ QPixmap GameDrawer::getGameSprite_oid(const ObjectId& oid,int resolution)
     
     if(it == mImageCache.end())
     {
-        std::cerr << "Image for id " << oid << " and resolution " << resolution << " not in cache. Creating!" << std::endl;
+        std::cerr << "Image for id " << item_id << " and resolution " << resolution << " not in cache. Creating!" << std::endl;
         
         QPixmap pix = getImageForObjectId(oid).scaled(QSize(resolution,resolution),Qt::IgnoreAspectRatio,Qt::SmoothTransformation);
         
@@ -173,7 +173,7 @@ QPixmap GameDrawer::getGameSprite_number(int n, int resolution)
 
     if(it == mImageCache.end())
     {
-        std::cerr << "Image for id " << n << " and resolution " << resolution << " not in cache. Creating!" << std::endl;
+        std::cerr << "Image for id " << item_id << " and resolution " << resolution << " not in cache. Creating!" << std::endl;
 
         QPixmap pix = getImageForNbrMine(n).scaled(QSize(resolution,resolution),Qt::IgnoreAspectRatio,Qt::SmoothTransformation);
 

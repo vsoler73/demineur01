@@ -32,7 +32,17 @@ int Level::NbrMine(uint32_t i, uint32_t j) const {
 
     return mNbrMine[mSizeX * j + i] ;
 }
+int Level::NbrDrapeau(uint32_t i,uint32_t j) const {
+    assert(i < mSizeX) ;
+    assert(j < mSizeY) ;
+    int d=0;
+    for (int x=-1; x<2; ++x)
+        for (int y=-1; y<2; ++y)
+            if (ok(i+x,j+y))
+                d = d + !!(mContent[mSizeX * (j+y) + (i+x)]&ObjectId::Drapeau);
 
+    return d;
+}
 
 
 void Level::IncrementMine(int i, int j){
@@ -65,8 +75,8 @@ void Level::initDefault()
             operator()(xmine,ymine) |= ObjectId::Mine ;
             for(int x=-1;x<2;++x)
                 for(int y=-1;y<2;++y)
-                    if (!(x==0 && y==0))
-                        IncrementMine(x+xmine,y+ymine);
+//                    if (!(x==0 && y==0))
+                    IncrementMine(x+xmine,y+ymine);
         }
         else {
             i--;

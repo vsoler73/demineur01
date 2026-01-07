@@ -37,12 +37,13 @@ public:
 	ObjectId operator()(uint32_t i,uint32_t j) const ;
 	ObjectId& operator()(uint32_t i,uint32_t j) ;
     int NbrMine(uint32_t i, uint32_t j)const;
+    int NbrDrapeau(uint32_t i, uint32_t j)const;
 	void die() { mPlayerState = PLAYER_DEAD ; }
     void startGame() { mPlayerState = PLAYER_PLAY ; }
 
 	uint32_t sizeX() const { return mSizeX ; }
 	uint32_t sizeY() const { return mSizeY ; }
-    bool ok(int i,int j) {
+    bool ok(int i,int j) const {
         return mSizeX>i && i>=0 && mSizeY>j && j>=0;
     }
 //	uint32_t collectedDiamonds() const { return mCollectedDiamonds ; }

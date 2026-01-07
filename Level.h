@@ -42,7 +42,9 @@ public:
 
 	uint32_t sizeX() const { return mSizeX ; }
 	uint32_t sizeY() const { return mSizeY ; }
-
+    bool ok(int i,int j) {
+        return mSizeX>i && i>=0 && mSizeY>j && j>=0;
+    }
 //	uint32_t collectedDiamonds() const { return mCollectedDiamonds ; }
 
     void fill(ObjectId o ) ;

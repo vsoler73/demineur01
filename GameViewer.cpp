@@ -70,14 +70,24 @@ void GameViewer::CaseFlip(int x, int y)
 void GameViewer::mousePressEvent(QMouseEvent *e)
 {
     mMousePressed = true ;
-    mOldMouseX = e->x() ;
-    mOldMouseY = e->y() ;
-    int i=mGameDrawer->windowCoordToGameCoordX(mOldMouseX);
-    int j=mGameDrawer->windowCoordToGameCoordY(mOldMouseY);
-    CaseFlip(i,j);
-    //(*mGame)(i,j)|=ObjectId::CaseRevelee;
+    if (e->buttons()==Qt::LeftButton){
+        int i=mGameDrawer->windowCoordToGameCoordX(e->x());
+        int j=mGameDrawer->windowCoordToGameCoordY(e->y());
+        if (!((*mGame)(i,j)&ObjectId::Drapeau))
+            CaseFlip(i,j);
+    }
+    if (e->buttons()==Qt::RightButton){
+        int i=mGameDrawer->windowCoordToGameCoordX(e->x());
+        int j=mGameDrawer->windowCoordToGameCoordY(e->y());
+        if (!!((*mGame)(i,j)&ObjectId::Drapeau)){
+            (*mGame)(i,j)&=~ObjectId::Drapeau;
+        }
+        else
+            (*mGame)(i,j)|=ObjectId::Drapeau;
+    }
     mGameDrawer->update(*mGame,width(),height(),mCurrentMode);
     update();
+
 }
 void GameViewer::mouseReleaseEvent(QMouseEvent *e)
 {

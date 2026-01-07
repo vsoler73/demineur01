@@ -8,7 +8,7 @@
 int main(int argc,char *argv[])
 {
     try {
-
+    srand48(time(NULL));
 
 	QApplication app(argc,argv) ;
     
